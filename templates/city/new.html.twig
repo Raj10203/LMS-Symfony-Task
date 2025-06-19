@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New City{% endblock %}
+
+{% set current_page = 'aside-menu-city' %}
+
+{% block body %}
+    <div class="card pb-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Create New City</h5>
+            <div>
+                <a href="{{ path('app_city_index') }}" class="btn btn-secondary">
+                    <i class="bx bx-arrow-back me-0 me-sm-1"></i>
+                    <span class="d-none d-sm-inline-block">Back to List</span>
+                </a>
+                <a href="{{ path('app_city_new') }}" class="btn btn-primary">
+                    <i class="bx bx-plus me-0 me-sm-1"></i>
+                    <span class="d-none d-sm-inline-block">Add City</span>
+                </a>
+            </div>
+        </div>
+
+            {{ include('city/_form.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#add-city').on('click', function () {
+                const newInput = `<div class="city-field input-group mb-2 w-full">
+                                        <input type="text" name="cities[]" class="form-control" placeholder="City Name" />
+                                    <button type="button" class="btn btn-danger ms-2 remove-city">
+                                        <i class="bx-x bx" ></i>
+                                    </button>
+                                </div>`;
+                $('#city-fields').append(newInput);
+            });
+
+            $('#city-fields').on('click', '.remove-city', function () {
+                $(this).closest('.city-field').remove();
+            });
+        });
+    </script>
+{% endblock %}

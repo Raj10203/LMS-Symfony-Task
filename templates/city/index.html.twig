@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}City index{% endblock %}
+
+{% set current_page = 'aside-menu-city' %}
+
+{% block body %}
+<!-- City List Card -->
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Cites</h5>
+        <a href="{{ path('app_city_new') }}" class="btn btn-primary">
+            <i class="bx bx-plus me-0 me-sm-1"></i>
+            <span class="d-none d-sm-inline-block">Add City</span>
+        </a>
+    </div>
+    <div class="table-responsive text-nowrap scrollable-container overflow-hidden">
+    <table class="table datatable table-bordered  table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Active</th>
+                <th>IsDeleted</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for city in cities %}
+            <tr>
+                <td>{{ city.id }}</td>
+                <td>{{ city.name }}</td>
+                <td>{{ city.country.name }}</td>
+                <td>{{ city.active ? 'Yes' : 'No' }}</td>
+                <td>{{ city.isDeleted ? 'Yes' : 'No' }}</td>
+                <td>{{ city.createdAt ? city.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ city.updatedAt ? city.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_city_show', {'id': city.id}) }}">
+                        <button class="btn btn-primary">
+                            <i class='bx bx-show'  ></i>
+                        </button>
+                    </a>
+                    <a href="{{ path('app_city_edit', {'id': city.id}) }}">
+                        <button class="btn btn-success">
+                            <i class='bx bx-edit'></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7" class="text-center">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

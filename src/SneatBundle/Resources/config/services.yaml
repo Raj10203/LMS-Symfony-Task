@@ -1,0 +1,9 @@
+services:
+  App\SneatBundle\Command\InstallAssetsCommand:
+    arguments:
+      $projectDir: '%kernel.project_dir%'
+    tags: ['console.command']
+    
+  App\SneatBundle\Controller\:
+    resource: '../../Controller'
+    tags: ['controller.service_arguments'] 
