@@ -20,7 +20,6 @@ class CityForm extends AbstractType
                 ]
             ])
             ->add('active')
-            ->add('isDeleted')
             ->add('country', EntityType::class, [
                 'class' => Country::class,
                 'choice_label' => 'name',

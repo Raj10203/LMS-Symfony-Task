@@ -20,8 +20,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-          rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('bundles/sneat/assets/vendor/fonts/iconify-icons.css') }}"/>
 
     <!-- Core CSS -->
@@ -34,7 +35,6 @@
 
     <!-- Helpers -->
     <script src="{{ asset('bundles/sneat/assets/vendor/js/helpers.js') }}"></script>
-
 
 
     {% block javascripts %}
@@ -55,6 +55,25 @@
             });
             {% endfor %}
             {% endfor %}
+            $(document).ready(function () {
+                $('.table').DataTable({
+                    processing: true,
+                    scrollX: true,
+                    ordering: true,
+                    initComplete: function () {
+                        $('#dt-length-0').select2({
+                            minimumResultsForSearch: Infinity
+                        })
+                        var $container = $('.dt-scroll-body');
+                        if ($container.length) {
+                            $container.each(function () {
+                                new PerfectScrollbar(this);
+                                $(this).removeClass('overflow-hidden'); // enable scrolling
+                            });
+                        }
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -109,40 +128,40 @@
                     </a>
                 </li>
 
-{#                <!-- Inventory -->#}
-{#                <li class="menu-item" id="aside-menu-inventory">#}
-{#                    <a href="#" class="menu-link menu-toggle">#}
-{#                        <i class="menu-icon tf-icons bx bx-objects-vertical-center"></i>#}
-{#                        <div class="text-truncate" data-i18n="Layouts">Inventory</div>#}
-{#                    </a>#}
+                {#                <!-- Inventory --> #}
+                {#                <li class="menu-item" id="aside-menu-inventory"> #}
+                {#                    <a href="#" class="menu-link menu-toggle"> #}
+                {#                        <i class="menu-icon tf-icons bx bx-objects-vertical-center"></i> #}
+                {#                        <div class="text-truncate" data-i18n="Layouts">Inventory</div> #}
+                {#                    </a> #}
 
-{#                    <ul class="menu-sub">#}
+                {#                    <ul class="menu-sub"> #}
 
-{#                        <!-- Active Inventory -->#}
-{#                        <li class="menu-item" id="aside-menu-inventory-inventory">#}
-{#                            <a href="{{ path('app_inventory_index') }}" class="menu-link">#}
-{#                                <i class="menu-icon bx bx-objects-horizontal-center "></i>#}
-{#                                <div data-i18n="Categories">Inventory</div>#}
-{#                            </a>#}
-{#                        </li>#}
+                {#                        <!-- Active Inventory --> #}
+                {#                        <li class="menu-item" id="aside-menu-inventory-inventory"> #}
+                {#                            <a href="{{ path('app_inventory_index') }}" class="menu-link"> #}
+                {#                                <i class="menu-icon bx bx-objects-horizontal-center "></i> #}
+                {#                                <div data-i18n="Categories">Inventory</div> #}
+                {#                            </a> #}
+                {#                        </li> #}
 
-{#                        <!-- Active Inventory -->#}
-{#                        <li class="menu-item" id="aside-menu-inventory-active">#}
-{#                            <a href="{{ path('app_inventory_active_index') }}" class="menu-link">#}
-{#                                <i class="menu-icon tf-icons fas fa-battery-half"></i>#}
-{#                                <div data-i18n="Categories">Active Inventory</div>#}
-{#                            </a>#}
-{#                        </li>#}
+                {#                        <!-- Active Inventory --> #}
+                {#                        <li class="menu-item" id="aside-menu-inventory-active"> #}
+                {#                            <a href="{{ path('app_inventory_active_index') }}" class="menu-link"> #}
+                {#                                <i class="menu-icon tf-icons fas fa-battery-half"></i> #}
+                {#                                <div data-i18n="Categories">Active Inventory</div> #}
+                {#                            </a> #}
+                {#                        </li> #}
 
-{#                        <!-- Retired Inventory -->#}
-{#                        <li class="menu-item" id="aside-menu-inventory-retired">#}
-{#                            <a href="{{ path('app_inventory_retired_index') }}" class="menu-link">#}
-{#                                <i class="menu-icon tf-icons fas fa-battery-empty"></i>#}
-{#                                <div data-i18n="Categories">Retired Inventory</div>#}
-{#                            </a>#}
-{#                        </li>#}
-{#                    </ul>#}
-{#                </li>#}
+                {#                        <!-- Retired Inventory --> #}
+                {#                        <li class="menu-item" id="aside-menu-inventory-retired"> #}
+                {#                            <a href="{{ path('app_inventory_retired_index') }}" class="menu-link"> #}
+                {#                                <i class="menu-icon tf-icons fas fa-battery-empty"></i> #}
+                {#                                <div data-i18n="Categories">Retired Inventory</div> #}
+                {#                            </a> #}
+                {#                        </li> #}
+                {#                    </ul> #}
+                {#                </li> #}
             </ul>
         </aside>
         <!-- / Menu -->
@@ -193,11 +212,11 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-{#                                                <span class="fw-medium d-block">#}
-{#                                                    {{ app.user.firstName }}z#}
-{#                                                    {{ app.user.lastName }}#}
-{#                                                </span>#}
-{#                                                <small class="text-muted">{{ app.user.email }}</small>#}
+                                                {#                                                <span class="fw-medium d-block"> #}
+                                                {#                                                    {{ app.user.firstName }}z #}
+                                                {#                                                    {{ app.user.lastName }} #}
+                                                {#                                                </span> #}
+                                                {#                                                <small class="text-muted">{{ app.user.email }}</small> #}
                                             </div>
                                         </div>
                                     </a>
@@ -220,18 +239,18 @@
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
-{#                                <li>#}
-{#                                    <a class="dropdown-item" href="{{ path('app_auth_2fa_enable') }}">#}
-{#                                        <i class="bx bx-power-off me-2"></i>#}
-{#                                        <span class="align-middle">Enable 2fa</span>#}
-{#                                    </a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a class="dropdown-item" href="{{ path('app_auth_logout') }}">#}
-{#                                        <i class="bx bx-power-off me-2"></i>#}
-{#                                        <span class="align-middle">Log Out</span>#}
-{#                                    </a>#}
-{#                                </li>#}
+                                {#                                <li> #}
+                                {#                                    <a class="dropdown-item" href="{{ path('app_auth_2fa_enable') }}"> #}
+                                {#                                        <i class="bx bx-power-off me-2"></i> #}
+                                {#                                        <span class="align-middle">Enable 2fa</span> #}
+                                {#                                    </a> #}
+                                {#                                </li> #}
+                                {#                                <li> #}
+                                {#                                    <a class="dropdown-item" href="{{ path('app_auth_logout') }}"> #}
+                                {#                                        <i class="bx bx-power-off me-2"></i> #}
+                                {#                                        <span class="align-middle">Log Out</span> #}
+                                {#                                    </a> #}
+                                {#                                </li> #}
                             </ul>
                         </li>
                         <!--/ User -->

@@ -11,3 +11,37 @@
 
     <a href="{{ path('app_address_index') }}">back to list</a>
 {% endblock %}
+
+{% block additional_js %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#address_form_country').on('change', function () {
+                const countryId = $(this).val();
+                const $citySelect = $('#address_form_city');
+
+                $citySelect.html('<option value="">Loading...</option>');
+
+                if (!countryId) {
+                    $citySelect.html('<option value="">Select Country First</option>');
+                    return;
+                }
+
+                $.ajax({
+                    url: '/country/get-cities/' + countryId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        let options = '<option value="">Select City</option>';
+                        $.each(data, function (index, city) {
+                            options += '<option value="' + city.id + '">' + city.name + '</option>';
+                        });
+                        $citySelect.html(options);
+                    },
+                    error: function () {
+                        $citySelect.html('<option value="">Error loading cities</option>');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

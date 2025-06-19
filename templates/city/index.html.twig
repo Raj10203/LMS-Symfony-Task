@@ -15,7 +15,7 @@
         </a>
     </div>
     <div class="table-responsive text-nowrap scrollable-container overflow-hidden">
-    <table class="table">
+    <table class="table table-bordered  table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -39,8 +39,16 @@
                 <td>{{ city.createdAt ? city.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ city.updatedAt ? city.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_city_show', {'id': city.id}) }}">show</a>
-                    <a href="{{ path('app_city_edit', {'id': city.id}) }}">edit</a>
+                    <a href="{{ path('app_city_show', {'id': city.id}) }}">
+                        <button class="btn btn-primary">
+                            <i class='bx bx-show'  ></i>
+                        </button>
+                    </a>
+                    <a href="{{ path('app_city_edit', {'id': city.id}) }}">
+                        <button class="btn btn-success">
+                            <i class='bx bx-edit'></i>
+                        </button>
+                    </a>
                 </td>
             </tr>
         {% else %}

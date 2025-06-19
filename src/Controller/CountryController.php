@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\Country;
 use App\Form\CountryForm;
 use App\Repository\CountryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -77,5 +79,21 @@ final class CountryController extends AbstractController
         }
 
         return $this->redirectToRoute('app_country_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/get-cities/{countryId}', name: 'get_cities', methods: ['GET'])]
+    public function getCities(Country $countryId): JsonResponse
+    {
+        $cities = $countryId->getCities()->toArray();
+
+        $cityArray = [];
+        foreach ($cities as $city) {
+            $cityArray[] = [
+                'id' => $city->getId(),
+                'name' => $city->getName(),
+            ];
+        }
+
+        return new JsonResponse($cityArray);
     }
 }
