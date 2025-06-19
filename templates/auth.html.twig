@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      class="layout-menu-fixed layout-compact"
+      data-assets-path="{{ asset('bundles/sneat/assets/') }}"
+      data-template="vertical-menu-template-free">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+
+    <title>{% block title %}Sneat Admin{% endblock %}</title>
+    <meta name="description" content=""/>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/sneat/assets/img/favicon/favicon.ico') }}"/>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('bundles/sneat/assets/vendor/fonts/iconify-icons.css') }}"/>
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('bundles/sneat/assets/vendor/css/core.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/sneat/assets/css/demo.css') }}"/>
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet"
+          href="{{ asset('bundles/sneat/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}"/>
+
+    <!-- Page -->
+    <link rel="stylesheet" href="{{ asset('bundles/sneat/assets/vendor/css/pages/page-auth.css') }}"/>
+
+    <!-- Helpers -->
+    <script src="{{ asset('bundles/sneat/assets/vendor/js/helpers.js') }}"></script>
+    <!-- Config -->
+    <script src="{{ asset('bundles/sneat/assets/js/config.js') }}"></script>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+<!-- Content -->
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register -->
+            <div class="card px-sm-6 px-0">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center">
+                        <a href="{{ path('app_home') }}" class="app-brand-link">
+{#                            <img id="logo" src="{{ asset('bundles/sneat/assets/img/avatars/mitarsh-logo.png') }}"#}
+{#                                 alt="Logo"#}
+{#                                 class="img-fluid">#}
+                            <img src="{{ asset('bundles/sneat/assets/img/illustrations/man-with-laptop.png') }}" alt="logo"
+                                 class="img-fluid m-2" height="100" width="100">
+                        </a>
+                    </div>
+                    <!-- Content block -->
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

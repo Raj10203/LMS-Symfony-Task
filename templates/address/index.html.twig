@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Address index{% endblock %}
+
+{% set current_page = 'aside-menu-address' %}
+
+{% block body %}
+<!-- Address List Card -->
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Address</h5>
+        <a href="{{ path('app_address_new') }}" class="btn btn-primary">
+            <i class="bx bx-plus me-0 me-sm-1"></i>
+            <span class="d-none d-sm-inline-block">Add Address</span>
+        </a>
+    </div>
+    <div class="table-responsive text-nowrap scrollable-container overflow-hidden">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>StreetName</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Postcode</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td>{{ address.id }}</td>
+                    <td>{{ address.streetName }}</td>
+                    <td>{{ address.city.name }}</td>
+                    <td>{{ address.city.country.name }}</td>
+                    <td>{{ address.postcode }}</td>
+                    <td>
+                        <a href="{{ path('app_address_show', {'id': address.id}) }}">show</a>
+                        <a href="{{ path('app_address_edit', {'id': address.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8" class="text-center">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
